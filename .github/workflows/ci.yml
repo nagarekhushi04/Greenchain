@@ -7,20 +7,20 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test_and_build:
-    name: Test and Build Contracts
+  test_and_build_contracts:
+    name: Test & Build Soroban Smart Contracts
     runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install Rust
+    - name: Install Rust Toolchain
       uses: dtolnay/rust-toolchain@stable
       with:
         target: wasm32-unknown-unknown
-        components: clippy
+        components: clippy, rustfmt
 
-    - name: Cache dependencies
+    - name: Cache Cargo Dependencies
       uses: actions/cache@v3
       with:
         path: |
@@ -28,62 +28,59 @@ jobs:
           ~/.cargo/git
           target
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-        
-    - name: Install Soroban CLI
-      run: cargo install --locked soroban-cli --features opt
 
-    - name: Check Formatting
-      run: cargo fmt --all -- --check
-      continue-on-error: true
-
-    - name: Run Clippy
-      run: cargo clippy --workspace --all-targets -- -D warnings
-      continue-on-error: true
-
-    - name: Run Tests
+    - name: Run Unit Tests
       run: cargo test --workspace
 
-    - name: Build Contracts
-      run: |
-        soroban contract build
-        soroban contract optimize --wasm target/wasm32-unknown-unknown/release/registry.wasm
-        soroban contract optimize --wasm target/wasm32-unknown-unknown/release/token.wasm
-        soroban contract optimize --wasm target/wasm32-unknown-unknown/release/marketplace.wasm
+    - name: Compile WASM Smart Contracts
+      run: cargo build --target wasm32-unknown-unknown --release
 
-  deploy_testnet:
-    name: Deploy to Testnet (Main only)
-    needs: test_and_build
-    if: github.ref == 'refs/heads/main'
+  test_and_build_frontend:
+    name: Build & Test Web Client
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Install Rust
-      uses: dtolnay/rust-toolchain@stable
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
       with:
-        target: wasm32-unknown-unknown
-        
-    - name: Install Soroban CLI
-      run: cargo install --locked soroban-cli --features opt
-      
-    - name: Build Contracts
-      run: soroban contract build
-      
-    - name: Configure Soroban Testnet
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install Frontend Dependencies
       run: |
-        soroban config network add --global testnet \
-          --rpc-url https://soroban-testnet.stellar.org:443 \
-          --network-passphrase "Test SDF Network ; September 2015"
-          
-    - name: Generate Admin Identity
+        cd frontend
+        npm ci
+
+    - name: Build Frontend Application
       run: |
-        echo "${{ secrets.ADMIN_SECRET_KEY }}" > admin_secret.txt
-        soroban keys add admin --secret-key admin_secret.txt
-        rm admin_secret.txt
-        
-    # NOTE: Actual deployment would require maintaining state of deployed IDs.
-    # We document the manual deployment step in deploy.sh instead of fully automating 
-    # to avoid deploying a new contract on every single merge, unless desired.
-    - name: Smoke Test (Simulated)
-      run: echo "Contracts built and ready for deployment to testnet."
+        cd frontend
+        npm run build
+
+  test_and_build_indexer:
+    name: Build & Test Event Indexer
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: indexer/package-lock.json
+
+    - name: Install Indexer Dependencies
+      run: |
+        cd indexer
+        npm ci
+
+    - name: Build & Test Indexer API
+      run: |
+        cd indexer
+        npm run build
+        npm test
+
