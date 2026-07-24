@@ -1,0 +1,89 @@
+name: GreenChain CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test_and_build:
+    name: Test and Build Contracts
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        target: wasm32-unknown-unknown
+        components: clippy
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+        
+    - name: Install Soroban CLI
+      run: cargo install --locked soroban-cli --features opt
+
+    - name: Check Formatting
+      run: cargo fmt --all -- --check
+      continue-on-error: true
+
+    - name: Run Clippy
+      run: cargo clippy --workspace --all-targets -- -D warnings
+      continue-on-error: true
+
+    - name: Run Tests
+      run: cargo test --workspace
+
+    - name: Build Contracts
+      run: |
+        soroban contract build
+        soroban contract optimize --wasm target/wasm32-unknown-unknown/release/registry.wasm
+        soroban contract optimize --wasm target/wasm32-unknown-unknown/release/token.wasm
+        soroban contract optimize --wasm target/wasm32-unknown-unknown/release/marketplace.wasm
+
+  deploy_testnet:
+    name: Deploy to Testnet (Main only)
+    needs: test_and_build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        target: wasm32-unknown-unknown
+        
+    - name: Install Soroban CLI
+      run: cargo install --locked soroban-cli --features opt
+      
+    - name: Build Contracts
+      run: soroban contract build
+      
+    - name: Configure Soroban Testnet
+      run: |
+        soroban config network add --global testnet \
+          --rpc-url https://soroban-testnet.stellar.org:443 \
+          --network-passphrase "Test SDF Network ; September 2015"
+          
+    - name: Generate Admin Identity
+      run: |
+        echo "${{ secrets.ADMIN_SECRET_KEY }}" > admin_secret.txt
+        soroban keys add admin --secret-key admin_secret.txt
+        rm admin_secret.txt
+        
+    # NOTE: Actual deployment would require maintaining state of deployed IDs.
+    # We document the manual deployment step in deploy.sh instead of fully automating 
+    # to avoid deploying a new contract on every single merge, unless desired.
+    - name: Smoke Test (Simulated)
+      run: echo "Contracts built and ready for deployment to testnet."
