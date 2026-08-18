@@ -109,7 +109,8 @@ flowchart TD
 <div align="center">
 
 ### 📱 Mobile Responsive Interface
-<img src="assets/mobile_ui.jpg" alt="Mobile UI" width="700"/>
+<<img width="1920" height="1080" alt="Screenshot 2026-08-18 161806" src="https://github.com/user-attachments/assets/83529f2d-3e81-49fe-aa1b-ef415d55b6c6" />
+>
 
 <br/><br/>
 
