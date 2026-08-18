@@ -9,11 +9,11 @@
 [![React](https://img.shields.io/badge/Frontend-React_19_%2B_TypeScript-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Build-Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![CI Status](https://img.shields.io/badge/CI%2FCD-Passing-10B981?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/nagarekhushi04/Greenchain/actions)
-[![Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/khushinagare04-5573s-projects/greenchain/EjVYApDi3L48GusKrDWYC8baCpUX)
+[![Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://greenchain-git-main-khushinagare04-5573s-projects.vercel.app/)
 
 <br/>
 
-[🚀 **Live Demo**](https://vercel.com/khushinagare04-5573s-projects/greenchain/EjVYApDi3L48GusKrDWYC8baCpUX) • [🎥 **Video Demo**](https://www.loom.com/share/b3fb4a0924be49bfa99046a5efd1b15b) • [📖 **Demo Walkthrough**](DEMO_SCRIPT.md) • [📜 **Contracts**](#-deployed-smart-contracts-stellar-testnet)
+[🚀 **Live Demo**](https://greenchain-git-main-khushinagare04-5573s-projects.vercel.app/) • [🎥 **Video Demo**](https://www.loom.com/share/b3fb4a0924be49bfa99046a5efd1b15b) • [📖 **Demo Walkthrough**](DEMO_SCRIPT.md) • [📜 **Contracts**](#-deployed-smart-contracts-stellar-testnet)
 
 </div>
 
