@@ -67,7 +67,10 @@ export default function Marketplace({ address }: { address: string | null }) {
       </div>
       <h2 style={{ marginBottom: '2rem', fontSize: '2rem' }}>Active Listings</h2>
       {loading ? (
-        <p style={{ color: 'var(--text-muted)' }}>Loading live marketplace data...</p>
+        <div className="spinner-container">
+          <div className="spinner"></div>
+          <p style={{ color: 'var(--text-muted)', marginTop: '1rem' }}>Loading live marketplace data...</p>
+        </div>
       ) : listings.length === 0 ? (
         <p style={{ color: 'var(--text-muted)' }}>No active listings currently available.</p>
       ) : (
@@ -85,7 +88,9 @@ export default function Marketplace({ address }: { address: string | null }) {
                 onClick={() => handleBuy(listing)}
                 disabled={buyingId === listing.listing_id}
               >
-                {buyingId === listing.listing_id ? 'Processing...' : 'Purchase Offset'}
+                {buyingId === listing.listing_id ? (
+                  <span className="spinner-inline"></span>
+                ) : 'Purchase Offset'}
               </button>
             </div>
           ))}

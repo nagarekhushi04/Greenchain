@@ -110,7 +110,9 @@ export default function AdminDashboard({ address }: { address: string | null }) 
             disabled={loading}
           />
           <button type="submit" className="connect-btn" disabled={loading}>
-            {loading ? 'Processing...' : 'Register Project'}
+            {loading ? (
+              <><span className="spinner-inline"></span> Processing...</>
+            ) : 'Register Project'}
           </button>
         </form>
       </div>
