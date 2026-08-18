@@ -23,6 +23,12 @@
 
 **GreenChain** bridges the transparency gap in traditional carbon and environmental offset markets by leveraging **Stellar's Soroban smart contract framework**. It provides a fully auditable lifecycle for verified environmental assets (carbon credits, RECs, biodiversity units, forestry credits)—from rigorous verifier registration and cross-contract minting to trustless escrow marketplace trading and permanent on-chain certificate retirement.
 
+### 🌐 Project Links & Deliverables
+
+- 🚀 **Live Demo URL (Vercel):** [https://greenchain-git-main-khushinagare04-5573s-projects.vercel.app/](https://greenchain-git-main-khushinagare04-5573s-projects.vercel.app/)
+- 🎥 **Video Demo (Loom):** [https://www.loom.com/share/b3fb4a0924be49bfa99046a5efd1b15b](https://www.loom.com/share/b3fb4a0924be49bfa99046a5efd1b15b)
+- 🐙 **GitHub Repository:** [https://github.com/nagarekhushi04/Greenchain](https://github.com/nagarekhushi04/Greenchain)
+
 ---
 
 ## 📜 Deployed Smart Contracts (Stellar Testnet)
