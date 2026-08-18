@@ -1,14 +1,6 @@
 import { useState, useEffect } from 'react';
 import { invokeContract, MARKETPLACE_CONTRACT_ID } from '../services/soroban';
-
-interface Listing {
-  id: number;
-  listing_id: number;
-  seller: string;
-  asset_token: string;
-  amount: number;
-  price_per_token: number;
-}
+import { Listing } from '../types';
 
 export default function Marketplace({ address }: { address: string | null }) {
   const [listings, setListings] = useState<Listing[]>([]);
