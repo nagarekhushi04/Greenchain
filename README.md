@@ -3,7 +3,7 @@
 A production-grade decentralized marketplace on Stellar (Soroban smart contracts) for tokenizing and trading verified environmental assets (carbon credits, RECs, forestry credits).
 
 **Live Demo URL:** [Insert Live Vercel/Netlify Link Here]
-**Demo Video:** [Insert YouTube/Loom Link Here]
+**Demo Video:** [https://www.loom.com/share/b3fb4a0924be49bfa99046a5efd1b15b](https://www.loom.com/share/b3fb4a0924be49bfa99046a5efd1b15b)
 
 ## Architecture
 
