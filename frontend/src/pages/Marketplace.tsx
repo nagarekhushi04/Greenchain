@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { invokeContract, MARKETPLACE_CONTRACT_ID } from '../services/soroban';
-import { Listing } from '../types';
+import type { Listing } from '../types';
 
 export default function Marketplace({ address }: { address: string | null }) {
   const [listings, setListings] = useState<Listing[]>([]);

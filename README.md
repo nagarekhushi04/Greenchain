@@ -2,7 +2,7 @@
 
 A production-grade decentralized marketplace on Stellar (Soroban smart contracts) for tokenizing and trading verified environmental assets (carbon credits, RECs, forestry credits).
 
-**Live Demo URL:** [Insert Live Vercel/Netlify Link Here]
+**Live Demo URL:** [https://vercel.com/khushinagare04-5573s-projects/greenchain/EjVYApDi3L48GusKrDWYC8baCpUX](https://vercel.com/khushinagare04-5573s-projects/greenchain/EjVYApDi3L48GusKrDWYC8baCpUX)
 **Demo Video:** [https://www.loom.com/share/b3fb4a0924be49bfa99046a5efd1b15b](https://www.loom.com/share/b3fb4a0924be49bfa99046a5efd1b15b)
 
 ## Architecture
@@ -35,16 +35,13 @@ GreenChain consists of three main components:
 ### 3. Proof Screenshots
 
 #### Mobile Responsive UI
-*(Replace with actual screenshot)*
-![Mobile UI](assets/mobile_ui.png)
+![Mobile UI](assets/mobile_ui.jpg)
 
 #### CI/CD Pipeline Running Successfully
-*(Replace with actual screenshot)*
-![CI/CD Pipeline](assets/ci_cd.png)
+![CI/CD Pipeline](assets/ci_cd.jpg)
 
 #### Test Output (3+ Passing Tests)
-*(Replace with actual screenshot)*
-![Test Output](assets/test_output.png)
+![Test Output](assets/test_output.jpg)
 
 ---
 

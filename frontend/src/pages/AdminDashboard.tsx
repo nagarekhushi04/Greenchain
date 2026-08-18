@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { invokeContract, REGISTRY_CONTRACT_ID, TOKEN_CONTRACT_ID } from '../services/soroban';
-import { Project } from '../types';
+import type { Project } from '../types';
 
 export default function AdminDashboard({ address }: { address: string | null }) {
   const [projects, setProjects] = useState<Project[]>([]);
