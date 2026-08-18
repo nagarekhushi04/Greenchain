@@ -54,10 +54,11 @@ jobs:
         cd frontend
         npm ci
 
-    - name: Build Frontend Application
+    - name: Build and Test Frontend Application
       run: |
         cd frontend
         npm run build
+        npm test
 
   test_and_build_indexer:
     name: Build & Test Event Indexer
