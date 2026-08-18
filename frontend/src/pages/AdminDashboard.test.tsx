@@ -4,7 +4,7 @@ import AdminDashboard from './AdminDashboard';
 
 describe('AdminDashboard Component', () => {
   it('renders Verifier Dashboard heading', () => {
-    global.fetch = vi.fn().mockResolvedValue({
+    globalThis.fetch = vi.fn().mockResolvedValue({
       json: () => Promise.resolve({ projects: [] }),
     });
 
@@ -16,7 +16,7 @@ describe('AdminDashboard Component', () => {
   });
 
   it('renders no projects message when list is empty', async () => {
-    global.fetch = vi.fn().mockResolvedValue({
+    globalThis.fetch = vi.fn().mockResolvedValue({
       json: () => Promise.resolve({ projects: [] }),
     });
 
